@@ -3,55 +3,135 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LifeMAX Privacy Policy</title>
+<title>LifeMAX — Make your weeks count</title>
+<meta name="description" content="The average long life is about 4,000 weeks. LifeMAX shows you roughly how many you have left, then moves as you live. Free, private, iPhone + Apple Watch.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600&display=swap" rel="stylesheet">
 <style>
-  :root { --bone:#141210; --ink:#f2efe8; --faint:#8a847a; --sand:#d8b878; --line:#2c2823; }
+  :root {
+    --bone:#141210; --panel:#1d1a16; --ink:#f2efe8; --soft:#b8b1a4;
+    --faint:#8a847a; --sand:#d8b878; --sand-deep:#a8842f; --line:#2c2823;
+    --good:#5fd6a0;
+  }
   * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
   body { background:var(--bone); color:var(--ink); font:16px/1.65 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
-  main { max-width:640px; margin:0 auto; padding:56px 24px 96px; }
-  .brand { font-family:"Unbounded", sans-serif; letter-spacing:.25em; font-size:14px; color:var(--sand); margin-bottom:40px; }
-  h1 { font-size:26px; font-weight:600; margin-bottom:8px; }
-  h2 { font-family:"Unbounded", sans-serif; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--sand); margin:36px 0 12px; }
-  p, li { color:#c9c3b8; margin-bottom:14px; }
-  ul { padding-left:20px; }
-  strong { color:var(--ink); }
-  hr { border:0; border-top:1px solid var(--line); margin:40px 0; }
-  .foot { color:var(--faint); font-size:13px; margin-top:48px; }
+  .brandface { font-family:"Unbounded", sans-serif; }
+  main { max-width:960px; margin:0 auto; padding:0 24px 80px; }
+
+  nav { display:flex; justify-content:space-between; align-items:center; padding:28px 0; }
+  .wordmark { font-family:"Unbounded", sans-serif; letter-spacing:.28em; font-size:15px; color:var(--ink); display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .wordmark svg { flex:none; }
+  nav a.plain { color:var(--faint); font-size:13px; text-decoration:none; letter-spacing:.08em; text-transform:uppercase; }
+  nav a.plain:hover { color:var(--sand); }
+
+  .hero { text-align:center; padding:72px 0 40px; }
+  .hero h1 { font-family:"Unbounded", sans-serif; font-weight:600; font-size:clamp(26px, 5vw, 44px); line-height:1.25; max-width:820px; margin:0 auto 22px; }
+  .hero h1 em { font-style:normal; color:var(--sand); }
+  .hero p.sub { color:var(--soft); font-size:18px; max-width:560px; margin:0 auto 36px; }
+
+  .cta { display:inline-block; font-family:"Unbounded", sans-serif; font-size:13px; letter-spacing:.14em; text-transform:uppercase;
+         background:var(--sand); color:var(--bone); padding:16px 34px; border-radius:999px; text-decoration:none; }
+  .cta:hover { background:var(--ink); }
+  .cta-note { color:var(--faint); font-size:13px; margin-top:14px; }
+
+  /* the clock card — the app's dashboard, in CSS */
+  .clock { background:var(--panel); border:1px solid var(--line); border-radius:20px; max-width:420px;
+           margin:64px auto 0; padding:44px 24px 40px; text-align:center; }
+  .clock .eyebrow { font-family:"Unbounded", sans-serif; font-size:10px; letter-spacing:.3em; color:var(--faint); text-transform:uppercase; }
+  .clock .num { font-family:"Unbounded", sans-serif; font-weight:600; font-size:64px; line-height:1.1; margin:16px 0 4px; }
+  .clock .label { font-family:"Unbounded", sans-serif; font-size:11px; letter-spacing:.3em; color:var(--sand); text-transform:uppercase; }
+  .clock .delta { color:var(--good); font-size:14px; margin-top:18px; }
+  .clock svg { margin-top:6px; }
+
+  section.pillars { padding:88px 0 8px; }
+  h2.kicker { font-family:"Unbounded", sans-serif; font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:var(--sand); text-align:center; margin-bottom:44px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:14px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:26px 24px; }
+  .card h3 { font-family:"Unbounded", sans-serif; font-size:12px; letter-spacing:.2em; color:var(--sand); text-transform:uppercase; margin-bottom:10px; }
+  .card p { color:var(--soft); font-size:14.5px; }
+
+  .proof { text-align:center; padding:88px 0 0; }
+  .proof .big { font-family:"Unbounded", sans-serif; font-size:clamp(20px, 3.4vw, 30px); font-weight:500; max-width:640px; margin:0 auto; line-height:1.4; }
+  .proof .small { color:var(--faint); font-size:13px; margin-top:12px; }
+
+  .privacy { margin:88px auto 0; max-width:640px; text-align:center; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:40px 12px; }
+  .privacy p { color:var(--soft); font-size:15px; }
+  .privacy p strong { color:var(--ink); }
+  .privacy a { color:var(--sand); text-decoration:none; }
+
+  footer { text-align:center; padding:56px 0 0; color:var(--faint); font-size:13px; }
+  footer a { color:var(--faint); text-decoration:underline; }
+  footer a:hover { color:var(--sand); }
+  footer .fine { margin-top:10px; }
 </style>
 </head>
 <body>
 <main>
-  <div class="brand">LIFEMAX &#8987;</div>
-  <h1>LifeMAX Privacy Policy</h1>
-<p><strong>Effective: July 4, 2026</strong></p>
-<p>LifeMAX is built around one rule: <strong>your data stays on your phone.</strong></p>
-<h2>What we collect</h2>
-<p>Nothing. LifeMAX has no servers, no accounts, no analytics, and no trackers. Everything the app knows about you lives only on your device:</p>
-<p>- Your questionnaire answers, life estimate, journal entries, milestones, and medication log are stored in the app&#x27;s local storage on your phone. - If you connect Apple Health, LifeMAX reads steps, workouts, sleep, height, and weight <strong>on your device</strong> to adjust your habit levels. Health data is read-only, is never written back, and never leaves your phone. - Your live score is shared with the LifeMAX widget through Apple&#x27;s App Group storage, which is private to the app and stays on the device.</p>
-<h2>What we never do</h2>
-<p>- We never transmit, upload, or store your data anywhere outside your phone. - We never sell, share, or monetize your data in any form. Apple&#x27;s HealthKit rules forbid using Health data for advertising, marketing, or sale, and we follow that rule for <strong>all</strong> of your data, Health or not. - We never track you across apps or websites. The app contains no advertising or analytics SDKs.</p>
-<h2>What leaves your phone, and when</h2>
-<p>Only what you send yourself. The &quot;Report a problem&quot; button opens your own email app with a draft addressed to us; you see exactly what it contains and choose whether to send it. Links in the Research tab open studies in your browser. That&#x27;s the complete list.</p>
-<h2>Deleting your data</h2>
-<p>Settings, then Start over, wipes everything the app stores. Deleting the app does the same. If you connected Apple Health, you can revoke access anytime in iOS Settings, then Health, then Data Access &amp; Devices.</p>
-<h2>Not medical advice</h2>
-<p>LifeMAX turns population statistics into a rough personal estimate. It is a tool for thinking about time, not medical advice, a diagnosis, or a prediction. Medical questions belong with a clinician.</p>
-<h2>UV alerts (optional)</h2>
-<p>If you turn on UV alerts, LifeMAX reads your approximate location on your device and asks Apple's weather service for the UV index near you. That request goes to Apple and nowhere else. We never see, store, or share your location. Turn the toggle off and the checks stop.</p>
+  <nav>
+    <a class="wordmark" href="/lifemax-site/">LIFEMAX
+      <svg width="16" height="19" viewBox="0 0 20 24" aria-hidden="true"><path d="M2 2h16L11 12l7 10H2l7-10L2 2z" fill="none" stroke="#d8b878" stroke-width="2.2" stroke-linejoin="round"/></svg>
+    </a>
+    <a class="plain" href="privacy.html">Privacy</a>
+  </nav>
 
-<h2>Reminders</h2>
-<p>Journal reminders and milestone notifications are scheduled locally on your phone by iOS. No notification content ever leaves your device and nothing is sent to us.</p>
+  <div class="hero">
+    <h1>The average long life is about <em>4,000 weeks.</em></h1>
+    <p class="sub">LifeMAX shows you roughly how many you have left. Then it moves as you live. Good days earn days back. Rough stretches let them slip.</p>
+    <!-- At launch: change this to the App Store badge/link.
+         href="https://apps.apple.com/app/id6787760932" -->
+    <a class="cta" href="#clock">Coming to the App&nbsp;Store &middot; July&nbsp;13</a>
+    <div class="cta-note">Free &middot; iPhone + Apple&nbsp;Watch</div>
 
-<h2>Children</h2>
-<p>LifeMAX is not directed at children under 13, and the intake requires an age of 13 or older.</p>
-<h2>Changes</h2>
-<p>If the app&#x27;s data practices ever change, this policy and the app will say so plainly before the change applies to you.</p>
-<h2>Contact</h2>
-<p>Questions: andrewchandlerwork@gmail.com</p>
-  <hr>
-  <p class="foot">LifeMAX is a statistical wellness tool, not medical advice. The app collects nothing; this page exists so you can hold us to that.</p>
+    <div class="clock" id="clock">
+      <div class="eyebrow">Wed, Jul 8 &middot; Week 1,565 of your life</div>
+      <div class="num">2,661</div>
+      <div class="label">Weeks left</div>
+      <div class="delta">+52 weeks gained since you started</div>
+      <svg width="52" height="62" viewBox="0 0 20 24" aria-hidden="true"><path d="M2 2h16L11 12l7 10H2l7-10L2 2z" fill="none" stroke="#d8b878" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+
+  <section class="pillars">
+    <h2 class="kicker">One clock. Five ways it moves.</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>The Clock</h3>
+        <p>A live count of your weeks, built from actuarial life tables and published research. Your baseline freezes on day one, so you always see how far you've come.</p>
+      </div>
+      <div class="card">
+        <h3>The Journal</h3>
+        <p>Thirty seconds a night: sleep, diet, mood, one win. A weekly check-in moves your habits. Streaks and achievements keep you honest.</p>
+      </div>
+      <div class="card">
+        <h3>Milestones</h3>
+        <p>Commit to quitting smoking and watch the years walk back, day by day. Take on stress, sleep, or diet. Each one earns time.</p>
+      </div>
+      <div class="card">
+        <h3>The Receipts</h3>
+        <p>Every factor links to the study behind it. No jargon. We tell you what the research actually means for you.</p>
+      </div>
+      <div class="card">
+        <h3>The Wrist</h3>
+        <p>Apple Watch app and complications keep the clock in sight. Apple Health fills in what your devices already know.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="proof">
+    <div class="big">Half of our first test group opens LifeMAX twice a day.</div>
+    <div class="small">Private alpha, July 2026</div>
+  </div>
+
+  <div class="privacy">
+    <p><strong>Free. No ads. No accounts.</strong> Everything you enter stays on your phone. We never see it, collect it, or sell it. <a href="privacy.html">Read the privacy policy&nbsp;&rarr;</a></p>
+  </div>
+
+  <footer>
+    <a href="privacy.html">Privacy Policy</a>
+    <div class="fine">LifeMAX is an estimate to think with, not medical advice, a diagnosis, or a prediction.</div>
+    <div class="fine">&copy; 2026 LifeMAX</div>
+  </footer>
 </main>
 </body>
 </html>
