@@ -9,7 +9,7 @@
   :root {
     --ink:#1d1d1f; --grey:#6e6e73; --hairline:#d2d2d7; --wash:#f5f5f7;
     --blue:#0071e3; --blue-hover:#0077ed;
-    /* the product's own palette, used only inside the product shot */
+    /* the product's own palette, used only inside product shots */
     --app-bone:#141210; --app-panel:#1d1a16; --app-ink:#f2efe8;
     --app-faint:#8a847a; --app-sand:#d8b878; --app-line:#2c2823; --app-good:#5fd6a0;
   }
@@ -24,8 +24,18 @@
   .navin { max-width:980px; margin:0 auto; padding:0 22px; height:48px;
            display:flex; align-items:center; justify-content:space-between; }
   .navbrand { font-size:17px; font-weight:600; letter-spacing:-.01em; color:var(--ink); text-decoration:none; }
+  .navright { display:flex; align-items:center; gap:18px; }
   nav a.plain { font-size:12px; color:var(--ink); opacity:.8; text-decoration:none; }
   nav a.plain:hover { opacity:1; color:var(--blue); }
+  .navcta { font-size:12px; background:var(--blue); color:#fff; padding:5px 13px; border-radius:980px; text-decoration:none; }
+  .navcta:hover { background:var(--blue-hover); }
+
+  .reveal { opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity:1; transform:none; transition:none; }
+    html { scroll-behavior:auto; }
+  }
 
   .hero { text-align:center; padding:110px 22px 84px; }
   .hero h1 { font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Helvetica, sans-serif;
@@ -37,13 +47,14 @@
   .cta:hover { background:var(--blue-hover); }
   .cta-note { color:var(--grey); font-size:14px; margin-top:14px; }
 
-  /* the product shot: the app's dark clock, exactly in its own palette */
+  /* the product shot: the app's dark clock, in its own palette */
   .shot { padding:0 22px 100px; text-align:center; }
   .clock { background:var(--app-bone); border-radius:28px; max-width:430px;
            margin:0 auto; padding:52px 24px 46px; text-align:center;
            box-shadow:0 30px 70px rgba(0,0,0,.18); }
   .clock .eyebrow { font-size:11px; letter-spacing:.28em; color:var(--app-faint); text-transform:uppercase; }
-  .clock .num { font-size:72px; font-weight:700; letter-spacing:-.02em; color:var(--app-ink); line-height:1.1; margin:14px 0 2px; }
+  .clock .num { font-size:72px; font-weight:700; letter-spacing:-.02em; color:var(--app-ink); line-height:1.1; margin:14px 0 2px;
+                font-variant-numeric:tabular-nums; }
   .clock .label { font-size:12px; letter-spacing:.3em; color:var(--app-sand); text-transform:uppercase; }
   .clock .delta { color:var(--app-good); font-size:15px; margin-top:18px; }
   .clock svg { margin-top:10px; }
@@ -54,6 +65,23 @@
   .statement h2 span { color:var(--grey); }
   .statement .sub { color:var(--grey); font-size:19px; max-width:560px; margin:20px auto 0; }
 
+  /* interactive teaser */
+  .teaser { text-align:center; padding:110px 22px; max-width:680px; margin:0 auto; }
+  .teaser h2 { font-size:clamp(28px, 4.4vw, 40px); font-weight:700; letter-spacing:-.02em; }
+  .teaser .sub { color:var(--grey); font-size:18px; margin:14px auto 40px; max-width:480px; }
+  .teaser .bignum { font-size:clamp(64px, 11vw, 110px); font-weight:700; letter-spacing:-.03em; line-height:1;
+                    font-variant-numeric:tabular-nums; }
+  .teaser .biglabel { color:var(--grey); font-size:15px; letter-spacing:.18em; text-transform:uppercase; margin-top:8px; }
+  .agewrap { margin:44px auto 0; max-width:420px; }
+  .agewrap .agelabel { display:flex; justify-content:space-between; color:var(--grey); font-size:14px; margin-bottom:10px; }
+  .agewrap .agelabel strong { color:var(--ink); font-variant-numeric:tabular-nums; }
+  input[type=range] { width:100%; appearance:none; -webkit-appearance:none; height:4px; border-radius:2px;
+                      background:linear-gradient(to right, var(--blue) 0%, var(--blue) var(--fill,37%), var(--hairline) var(--fill,37%)); outline:none; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:26px; height:26px; border-radius:50%;
+                      background:#fff; border:1px solid var(--hairline); box-shadow:0 2px 8px rgba(0,0,0,.18); cursor:pointer; }
+  .teaser .fine { color:var(--grey); font-size:13px; margin-top:34px; opacity:.8; }
+  .teaser .fine a { color:var(--blue); text-decoration:none; }
+
   .features { max-width:980px; margin:0 auto; padding:100px 22px; }
   .features h2 { font-size:clamp(28px, 4.4vw, 40px); font-weight:700; letter-spacing:-.02em; text-align:center; margin-bottom:52px; }
   .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px; }
@@ -61,15 +89,26 @@
   .card h3 { font-size:21px; font-weight:600; letter-spacing:-.01em; margin-bottom:8px; }
   .card p { color:var(--grey); font-size:15.5px; line-height:1.5; }
 
+  /* dark watch band */
+  .watchband { background:#000; color:#f5f5f7; padding:110px 22px; text-align:center; }
+  .watchband h2 { font-size:clamp(28px, 4.4vw, 44px); font-weight:700; letter-spacing:-.02em; }
+  .watchband p { color:#a1a1a6; font-size:19px; max-width:520px; margin:16px auto 54px; }
+  .comp { width:190px; height:190px; border-radius:50%; margin:0 auto; background:var(--app-bone);
+          border:3px solid #2c2823; display:flex; flex-direction:column; align-items:center; justify-content:center;
+          box-shadow:0 0 0 10px #0a0a0a, 0 26px 60px rgba(0,0,0,.6); position:relative; }
+  .comp::before { content:""; position:absolute; inset:8px; border-radius:50%; border:1.5px solid var(--app-sand); opacity:.5; }
+  .comp .cnum { font-size:44px; font-weight:700; color:var(--app-ink); letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+  .comp .clab { font-size:10px; letter-spacing:.32em; color:var(--app-sand); text-transform:uppercase; margin-top:2px; }
+
   .proof { text-align:center; padding:110px 22px; background:var(--wash); }
   .proof .num { font-size:clamp(56px, 9vw, 96px); font-weight:700; letter-spacing:-.03em; line-height:1; }
   .proof .line { color:var(--grey); font-size:19px; margin-top:14px; }
   .proof .src { color:var(--grey); font-size:13px; margin-top:8px; opacity:.7; }
 
-  .privacyband { background:#000; color:#f5f5f7; text-align:center; padding:110px 22px; }
+  .privacyband { background:#fff; text-align:center; padding:110px 22px; }
   .privacyband h2 { font-size:clamp(28px, 4.4vw, 44px); font-weight:700; letter-spacing:-.02em; }
-  .privacyband p { color:#a1a1a6; font-size:19px; max-width:560px; margin:18px auto 0; }
-  .privacyband a { color:#2997ff; text-decoration:none; }
+  .privacyband p { color:var(--grey); font-size:19px; max-width:560px; margin:18px auto 0; }
+  .privacyband a { color:var(--blue); text-decoration:none; }
   .privacyband a:hover { text-decoration:underline; }
 
   footer { max-width:980px; margin:0 auto; padding:34px 22px 60px; color:var(--grey); font-size:12px; }
@@ -82,7 +121,11 @@
 <nav>
   <div class="navin">
     <a class="navbrand" href="/">LifeMAX</a>
-    <a class="plain" href="privacy.html">Privacy</a>
+    <div class="navright">
+      <a class="plain" href="privacy.html">Privacy</a>
+      <!-- At launch: point at https://apps.apple.com/app/id6787760932 -->
+      <a class="navcta" href="#teaser">July 13</a>
+    </div>
   </div>
 </nav>
 
@@ -91,26 +134,38 @@
   <p class="sub">LifeMAX shows you roughly how many weeks you have left — and moves as you live. Good days earn days back.</p>
   <!-- At launch: point this at the store.
        href="https://apps.apple.com/app/id6787760932" -->
-  <a class="cta" href="#clock">Coming to the App&nbsp;Store July&nbsp;13</a>
+  <a class="cta" href="#teaser">Coming to the App&nbsp;Store July&nbsp;13</a>
   <div class="cta-note">Free &middot; iPhone + Apple&nbsp;Watch</div>
 </div>
 
-<div class="shot">
+<div class="shot reveal">
   <div class="clock" id="clock">
     <div class="eyebrow">Wed, Jul 8 &middot; Week 1,565 of your life</div>
-    <div class="num">2,661</div>
+    <div class="num" id="clocknum" data-target="2661">0</div>
     <div class="label">Weeks left</div>
     <div class="delta">+52 weeks gained since you started</div>
     <svg width="46" height="55" viewBox="0 0 20 24" aria-hidden="true"><path d="M2 2h16L11 12l7 10H2l7-10L2 2z" fill="none" stroke="#d8b878" stroke-width="1.6" stroke-linejoin="round"/></svg>
   </div>
 </div>
 
-<div class="statement">
+<div class="statement reveal">
   <h2>The average long life is about 4,000 weeks. <span>Most of us can name our bank balance to the dollar — and our remaining time not even to the decade.</span></h2>
   <p class="sub">Answer 21 honest questions. Get a personal estimate built from actuarial life tables and published research. Then watch it respond to how you actually live.</p>
 </div>
 
-<div class="features">
+<div class="teaser reveal" id="teaser">
+  <h2>Start with a rough idea.</h2>
+  <p class="sub">Slide to your age. This is only the population average — the app makes it personal, then makes it move.</p>
+  <div class="bignum" id="teasernum">2,556</div>
+  <div class="biglabel">weeks left, give or take</div>
+  <div class="agewrap">
+    <div class="agelabel"><span>Your age</span><strong id="agenum">29</strong></div>
+    <input type="range" id="age" min="18" max="90" value="29" aria-label="Your age">
+  </div>
+  <div class="fine">Population average, not your number. LifeMAX builds yours from 21 questions — and everything stays on your phone.</div>
+</div>
+
+<div class="features reveal">
   <h2>One clock. Five ways it moves.</h2>
   <div class="grid">
     <div class="card">
@@ -130,8 +185,8 @@
       <p>Every factor links to the study behind it. No jargon — we tell you what the research actually means for you.</p>
     </div>
     <div class="card">
-      <h3>Apple Watch + Health</h3>
-      <p>Complications keep the clock in sight. Apple Health fills in what your devices already know — sleep arrives logged.</p>
+      <h3>Apple Health</h3>
+      <p>Fills in what your devices already know — sleep arrives logged, your intake starts half-answered.</p>
     </div>
     <div class="card">
       <h3>Widgets</h3>
@@ -140,13 +195,22 @@
   </div>
 </div>
 
-<div class="proof">
+<div class="watchband reveal">
+  <h2>On your wrist. In your sight.</h2>
+  <p>The Apple Watch app and complications keep the clock where you'll see it — every time you check the time, you check your time.</p>
+  <div class="comp" aria-label="Apple Watch complication showing weeks left">
+    <div class="cnum">2,661</div>
+    <div class="clab">Weeks</div>
+  </div>
+</div>
+
+<div class="proof reveal">
   <div class="num">2&times; a day</div>
   <div class="line">How often half of our first test group opens LifeMAX.</div>
   <div class="src">Private alpha, July 2026</div>
 </div>
 
-<div class="privacyband">
+<div class="privacyband reveal">
   <h2>Your life. Your phone. Full stop.</h2>
   <p>Free, with no ads and no accounts. Everything you enter stays on your device — we never see it, collect it, or sell it. <a href="privacy.html">Read the privacy policy</a></p>
 </div>
@@ -158,5 +222,74 @@
     &copy; 2026 LifeMAX &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy Policy</a>
   </div>
 </footer>
+
+<script>
+(function () {
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // scroll reveals
+  var revealed = document.querySelectorAll(".reveal");
+  if (!reduced && "IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    revealed.forEach(function (el) { io.observe(el); });
+  } else {
+    revealed.forEach(function (el) { el.classList.add("in"); });
+  }
+
+  // clock count-up when the product shot appears
+  var num = document.getElementById("clocknum");
+  var target = parseInt(num.getAttribute("data-target"), 10);
+  function countUp() {
+    var t0 = null, dur = 1600;
+    function step(ts) {
+      if (!t0) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      num.textContent = Math.round(target * eased).toLocaleString();
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  if (reduced || !("IntersectionObserver" in window)) {
+    num.textContent = target.toLocaleString();
+  } else {
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { countUp(); cio.disconnect(); }
+      });
+    }, { threshold: 0.4 });
+    cio.observe(num);
+  }
+
+  // age teaser: population-average weeks remaining (US-average expectancy).
+  // Deliberately rough — the whole point is "the app makes it personal."
+  var slider = document.getElementById("age");
+  var ageOut = document.getElementById("agenum");
+  var weeksOut = document.getElementById("teasernum");
+  function expectancy(age) {
+    // crude period-table feel: expectancy rises the longer you've lived
+    if (age < 40) return 79;
+    if (age < 55) return 80;
+    if (age < 65) return 82;
+    if (age < 75) return 84;
+    if (age < 85) return 88;
+    return 92;
+  }
+  function update() {
+    var age = parseInt(slider.value, 10);
+    var weeks = Math.max(0, Math.round((expectancy(age) - age) * 52.18));
+    ageOut.textContent = age;
+    weeksOut.textContent = weeks.toLocaleString();
+    var fill = ((age - 18) / (90 - 18)) * 100;
+    slider.style.setProperty("--fill", fill + "%");
+  }
+  slider.addEventListener("input", update);
+  update();
+})();
+</script>
 </body>
 </html>
