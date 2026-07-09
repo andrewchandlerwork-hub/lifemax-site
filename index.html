@@ -113,6 +113,25 @@
   .privacyband a { color:#2997ff; text-decoration:none; }
   .privacyband a:hover { text-decoration:underline; }
 
+  /* market-research survey prompt */
+  .survey-scrim { position:fixed; inset:0; z-index:50; background:rgba(0,0,0,.6);
+                  backdrop-filter:blur(6px); display:none; align-items:flex-end; justify-content:center; }
+  .survey-scrim.open { display:flex; }
+  .survey { background:var(--card); border:1px solid var(--hairline); border-radius:22px 22px 0 0;
+            max-width:520px; width:100%; padding:36px 30px 30px; text-align:center;
+            transform:translateY(30px); opacity:0; transition:transform .45s ease, opacity .45s ease; }
+  .survey-scrim.open .survey { transform:none; opacity:1; }
+  @media (min-width:560px) { .survey-scrim { align-items:center; padding:22px; } .survey { border-radius:22px; } }
+  @media (prefers-reduced-motion: reduce) { .survey { transition:none; transform:none; opacity:1; } }
+  .survey h3 { font-size:24px; font-weight:700; letter-spacing:-.02em; }
+  .survey p { color:var(--grey); font-size:15.5px; margin:12px 0 26px; }
+  .survey .go { display:inline-block; background:var(--blue); color:#fff; font-size:16px;
+                padding:12px 26px; border-radius:980px; text-decoration:none; }
+  .survey .go:hover { background:var(--blue-hover); }
+  .survey .later { display:block; margin:18px auto 0; background:none; border:none; color:var(--grey);
+                   font-size:13px; text-decoration:underline; cursor:pointer; }
+  .survey .later:hover { color:var(--ink); }
+
   footer { max-width:980px; margin:0 auto; padding:34px 22px 60px; color:var(--grey); font-size:12px; }
   footer .legal { border-top:1px solid var(--hairline); padding-top:18px; line-height:1.6; }
   footer a { color:#86868b; text-decoration:none; }
@@ -225,9 +244,40 @@
   </div>
 </footer>
 
+<div class="survey-scrim" id="surveyscrim">
+  <div class="survey" role="dialog" aria-modal="true" aria-labelledby="surveytitle">
+    <h3 id="surveytitle">Help shape LifeMAX.</h3>
+    <p>We're a small team doing market research before launch. Three minutes, anonymous, and it genuinely steers what we build next.</p>
+    <a class="go" id="surveygo" href="https://lifemax.fillout.com/survey" target="_blank" rel="noopener">Take the survey</a>
+    <button class="later" id="surveylater" type="button">Maybe later</button>
+  </div>
+</div>
+
 <script>
 (function () {
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // survey prompt: once per visitor, 2.5s after arrival; Esc/scrim dismiss
+  try {
+    var KEY = "lifemax-survey-done";
+    var scrim = document.getElementById("surveyscrim");
+    if (!localStorage.getItem(KEY)) {
+      setTimeout(function () { scrim.classList.add("open"); }, 2500);
+    }
+    function closeSurvey() {
+      scrim.classList.remove("open");
+      localStorage.setItem(KEY, "1");
+    }
+    document.getElementById("surveylater").addEventListener("click", closeSurvey);
+    document.getElementById("surveygo").addEventListener("click", function () {
+      localStorage.setItem(KEY, "1");
+      scrim.classList.remove("open");
+    });
+    scrim.addEventListener("click", function (e) { if (e.target === scrim) closeSurvey(); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && scrim.classList.contains("open")) closeSurvey();
+    });
+  } catch (err) { /* private browsing without storage: never block the page */ }
 
   // scroll reveals
   var revealed = document.querySelectorAll(".reveal");
