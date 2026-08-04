@@ -60,7 +60,21 @@
   .cta { display:inline-block; margin-top:34px; background:var(--blue); color:#fff;
          font-size:17px; padding:12px 24px; border-radius:980px; text-decoration:none; }
   .cta:hover { background:var(--blue-hover); }
+  .badge { display:inline-block; margin-top:34px; }
+  .badge img { transition:transform .15s ease; }
+  .badge:hover img { transform:scale(1.03); }
   .cta-note { color:var(--grey); font-size:14px; margin-top:14px; }
+
+  /* store-card gallery */
+  .screens { padding:110px 0 100px; text-align:center; }
+  .screens h2 { font-size:clamp(28px, 4.4vw, 40px); font-weight:700; letter-spacing:-.02em; padding:0 22px; }
+  .screens .sub { color:var(--grey); font-size:18px; margin:14px auto 44px; max-width:480px; padding:0 22px; }
+  .screenrow { display:flex; gap:18px; overflow-x:auto; padding:6px 22px 28px;
+               scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; }
+  .screenrow::after { content:""; flex:0 0 4px; }
+  .screenrow img { width:min(64vw, 290px); border-radius:24px; flex:0 0 auto;
+                   scroll-snap-align:center; border:1px solid var(--hairline);
+                   box-shadow:0 20px 50px rgba(0,0,0,.5); }
 
   /* the product shot: the app's dark clock, in its own palette */
   .shot { padding:0 22px 100px; text-align:center; }
@@ -161,8 +175,7 @@
     <div class="navright">
       <a class="plain" href="support.html">Support</a>
       <a class="plain" href="privacy.html">Privacy</a>
-      <!-- At launch: point at https://apps.apple.com/app/id6787760932 -->
-      <a class="navcta" href="#teaser">July 13</a>
+      <a class="navcta" href="https://apps.apple.com/app/id6787760932">Download</a>
     </div>
   </div>
 </nav>
@@ -170,9 +183,9 @@
 <div class="hero">
   <h1>Make your weeks count.</h1>
   <p class="sub">LifeMAX shows you roughly how many weeks you have left, and moves as you live. Good days earn days back.</p>
-  <!-- At launch: point this at the store.
-       href="https://apps.apple.com/app/id6787760932" -->
-  <a class="cta" href="#teaser">Coming to the App&nbsp;Store July&nbsp;13</a>
+  <a class="badge" href="https://apps.apple.com/app/id6787760932" aria-label="Download LifeMAX on the App Store">
+    <img src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us" alt="Download on the App Store" height="54" style="display:block">
+  </a>
   <div class="cta-note">Free &middot; iPhone + Apple&nbsp;Watch</div>
 </div>
 
@@ -200,7 +213,7 @@
     <div class="agelabel"><span>Your age</span><strong id="agenum">29</strong></div>
     <input type="range" id="age" min="18" max="90" value="29" aria-label="Your age">
   </div>
-  <div class="fine">Population average, not your number. LifeMAX builds yours from 21 questions, and everything stays on your phone.</div>
+  <div class="fine">Population average, not your number. LifeMAX builds yours from a short evaluation, and everything stays on your phone.</div>
 </div>
 
 <div class="features reveal">
@@ -230,6 +243,19 @@
       <h3>Widgets</h3>
       <p>Your weeks on the home screen and lock screen, alternating with the goal you're chasing.</p>
     </div>
+  </div>
+</div>
+
+<div class="screens reveal">
+  <h2>See it.</h2>
+  <p class="sub">The clock, the journal, the milestones. Straight from the app.</p>
+  <div class="screenrow" aria-label="LifeMAX screenshots">
+    <img src="assets/screens/01-clock.jpg" alt="The LifeMAX clock: 2,486 weeks left, 12 gained since starting" loading="lazy">
+    <img src="assets/screens/02-journal.jpg" alt="The journal: thirty seconds a day, with a rising trend line" loading="lazy">
+    <img src="assets/screens/03-milestones.jpg" alt="Milestones: a 90-day commitment at day 48" loading="lazy">
+    <img src="assets/screens/04-focus.jpg" alt="Focus: sessions aimed at goals with deadlines" loading="lazy">
+    <img src="assets/screens/05-research.jpg" alt="The research: every number has a source" loading="lazy">
+    <img src="assets/screens/06-privacy.jpg" alt="No account. No ads. Everything stays on your phone" loading="lazy">
   </div>
 </div>
 
@@ -264,7 +290,7 @@
 <div class="survey-scrim" id="surveyscrim">
   <div class="survey" role="dialog" aria-modal="true" aria-labelledby="surveytitle">
     <h3 id="surveytitle">Help shape LifeMAX.</h3>
-    <p>We're a small team doing market research before launch. Three minutes, anonymous, and it genuinely steers what we build next.</p>
+    <p>We're a small team. Three minutes, anonymous, and it genuinely steers what we build next.</p>
     <a class="go" id="surveygo" href="https://lifemax.fillout.com/survey" target="_blank" rel="noopener">Take the survey</a>
     <button class="later" id="surveylater" type="button">Maybe later</button>
   </div>
