@@ -66,7 +66,7 @@
   .cta-note { color:var(--grey); font-size:14px; margin-top:14px; }
 
   /* store-card gallery */
-  .screens { padding:110px 0 100px; text-align:center; }
+  .screens { padding:10px 0 100px; text-align:center; }
   .screens h2 { font-size:clamp(28px, 4.4vw, 40px); font-weight:700; letter-spacing:-.02em; padding:0 22px; }
   .screens .sub { color:var(--grey); font-size:18px; margin:14px auto 44px; max-width:480px; padding:0 22px; }
   .screenrow { display:flex; gap:18px; overflow-x:auto; padding:6px 22px 28px;
@@ -76,9 +76,6 @@
                    scroll-snap-align:center; border:1px solid var(--hairline);
                    box-shadow:0 20px 50px rgba(0,0,0,.5); }
 
-  /* the product shot: the app's dark clock, in its own palette */
-  .shot { padding:0 22px 100px; text-align:center; }
-  .clock { background:var(--app-bone); border-radius:28px; max-width:430px;
            margin:0 auto; padding:52px 24px 46px; text-align:center;
            border:1px solid rgba(216,184,120,.28);
            box-shadow:0 0 90px rgba(216,184,120,.07), 0 30px 70px rgba(0,0,0,.55); }
@@ -189,15 +186,18 @@
   <div class="cta-note">Free &middot; iPhone + Apple&nbsp;Watch</div>
 </div>
 
-<div class="shot reveal">
-  <div class="clock" id="clock">
-    <div class="eyebrow">Wed, Jul 8 &middot; Week 1,565 of your life</div>
-    <div class="num" id="clocknum" data-target="2661">0</div>
-    <div class="label">Weeks left</div>
-    <div class="delta">+52 weeks gained since you started</div>
-    <svg width="46" height="55" viewBox="0 0 20 24" aria-hidden="true"><path d="M2 2h16L11 12l7 10H2l7-10L2 2z" fill="none" stroke="#d8b878" stroke-width="1.6" stroke-linejoin="round"/></svg>
+<div class="screens">
+  <div class="screenrow" aria-label="LifeMAX screenshots">
+    <img src="assets/screens/01-clock.jpg" alt="The LifeMAX clock: 2,486 weeks left, 12 gained since starting" loading="lazy">
+    <img src="assets/screens/02-journal.jpg" alt="The journal: thirty seconds a day, with a rising trend line" loading="lazy">
+    <img src="assets/screens/03-milestones.jpg" alt="Milestones: a 90-day commitment at day 48" loading="lazy">
+    <img src="assets/screens/04-focus.jpg" alt="Focus: sessions aimed at goals with deadlines" loading="lazy">
+    <img src="assets/screens/05-research.jpg" alt="The research: every number has a source" loading="lazy">
+    <img src="assets/screens/06-privacy.jpg" alt="No account. No ads. Everything stays on your phone" loading="lazy">
   </div>
 </div>
+
+
 
 <div class="statement reveal">
   <h2>Most health apps tell you what to track. <span>LifeMAX tells you why it matters.</span></h2>
@@ -243,19 +243,6 @@
       <h3>Widgets</h3>
       <p>Your weeks on the home screen and lock screen, alternating with the goal you're chasing.</p>
     </div>
-  </div>
-</div>
-
-<div class="screens reveal">
-  <h2>See it.</h2>
-  <p class="sub">The clock, the journal, the milestones. Straight from the app.</p>
-  <div class="screenrow" aria-label="LifeMAX screenshots">
-    <img src="assets/screens/01-clock.jpg" alt="The LifeMAX clock: 2,486 weeks left, 12 gained since starting" loading="lazy">
-    <img src="assets/screens/02-journal.jpg" alt="The journal: thirty seconds a day, with a rising trend line" loading="lazy">
-    <img src="assets/screens/03-milestones.jpg" alt="Milestones: a 90-day commitment at day 48" loading="lazy">
-    <img src="assets/screens/04-focus.jpg" alt="Focus: sessions aimed at goals with deadlines" loading="lazy">
-    <img src="assets/screens/05-research.jpg" alt="The research: every number has a source" loading="lazy">
-    <img src="assets/screens/06-privacy.jpg" alt="No account. No ads. Everything stays on your phone" loading="lazy">
   </div>
 </div>
 
@@ -337,7 +324,7 @@
 
   // clock count-up when the product shot appears
   var num = document.getElementById("clocknum");
-  var target = parseInt(num.getAttribute("data-target"), 10);
+  var target = num ? parseInt(num.getAttribute("data-target"), 10) : 0;
   function countUp() {
     var t0 = null, dur = 1600;
     function step(ts) {
@@ -349,7 +336,9 @@
     }
     requestAnimationFrame(step);
   }
-  if (reduced || !("IntersectionObserver" in window)) {
+  if (!num) {
+    /* the CSS clock was replaced by real screenshots */
+  } else if (reduced || !("IntersectionObserver" in window)) {
     num.textContent = target.toLocaleString();
   } else {
     var cio = new IntersectionObserver(function (entries) {
